@@ -1,0 +1,27 @@
+{
+  "name": "@chancedickson/react-media-query",
+  "description": "Easy to use media query hook and component for React.",
+  "version": "0.1.0",
+  "main": "cjs/index.js",
+  "module": "src/index.js",
+  "author": "Chance Dickson <me@chancedickson.com>",
+  "license": "BSD-3-Clause",
+  "repository": "github:chancedickson/react-media-query",
+  "homepage": "https://github.com/chancedickson/react-media-query",
+  "keywords": [
+    "react",
+    "media",
+    "query",
+    "hook",
+    "component"
+  ],
+  "scripts": {
+    "prepublishOnly": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "^1.2.2"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  }
+}
