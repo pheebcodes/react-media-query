@@ -33,7 +33,13 @@ export function useMediaQuery(query) {
   return matches;
 }
 
-export function MediaQuery({ query, children }) {
+export function MediaQuery({ query, render, children }) {
   const matches = useMediaQuery(query);
-  return matches ? children : null;
+
+  if (matches && render) {
+    return render();
+  } else if (matches) {
+    return children;
+  }
+  return null;
 }
