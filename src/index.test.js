@@ -55,4 +55,18 @@ describe("MediaQuery", () => {
     );
     expect(container.textContent).toBe("");
   });
+
+  test("rerenders on changes", () => {
+    setMatches(true);
+    const { container } = render(<MediaQuery query={QUERY} children={MATCH} />);
+    expect(container.textContent).toBe(MATCH);
+    act(() => {
+      setMatches(false);
+    });
+    expect(container.textContent).toBe("");
+    act(() => {
+      setMatches(true);
+    });
+    expect(container.textContent).toBe(MATCH);
+  });
 });
