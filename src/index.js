@@ -2,28 +2,28 @@ import React from "react";
 
 export function useMediaQuery(query) {
   const lastQuery = React.useRef();
-  const mq = React.useRef();
-  const callback = React.useRef();
+  const cancel = React.useRef();
   const [matches, setMatches] = React.useState();
 
   if (lastQuery.current !== query) {
-    if (mq.current) {
-      mq.current.removeListener(callback.current);
-      mq.current = null;
-      callback.current = null;
+    if (cancel.current) {
+      cancel.current();
+      cancel.current = null;
     }
 
     if (query) {
-      mq.current = window.matchMedia(query);
+      const mq = window.matchMedia(query);
+      const cb = () => {
+        setMatches(mq.matches);
+      };
+      mq.addListener(cb);
 
-      callback.current = () => {
-        setMatches(mq.current.matches);
+      cancel.current = () => {
+        mq.removeListener(cb);
       };
 
-      mq.current.addListener(callback.current);
-
       if (lastQuery.current === undefined) {
-        setMatches(mq.current.matches);
+        setMatches(mq.matches);
       }
     }
 
