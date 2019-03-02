@@ -1,47 +1,55 @@
+import { setMatches } from "./matchMedia.mock.js";
 import React from "react";
-import "react-testing-library/cleanup-after-each";
-import { render } from "react-testing-library";
-import { MediaQuery, useMediaQuery } from "../src/";
+import { render, act, cleanup } from "react-testing-library";
+import { MediaQuery, useMediaQuery } from "./index.js";
 
 const MATCH = "MATCH";
 const NO_MATCH = "NO_MATCH";
 const QUERY = "dummy query";
 
-function buildMatchMedia(matches) {
-  return () => ({
-    matches,
-    addListener: () => undefined,
-    removeListener: () => undefined
-  });
-}
-
 function HookComp() {
   return useMediaQuery(QUERY) ? MATCH : NO_MATCH;
 }
 
+afterEach(cleanup);
+
 describe("useMediaQuery", () => {
   test("returns true when match", () => {
-    window.matchMedia = buildMatchMedia(true);
+    setMatches(true);
     const { container } = render(<HookComp />);
     expect(container.textContent).toBe(MATCH);
   });
 
   test("returns false when doesn't match", () => {
-    window.matchMedia = buildMatchMedia(false);
+    setMatches(false);
     const { container } = render(<HookComp />);
     expect(container.textContent).toBe(NO_MATCH);
+  });
+
+  test("listens to changes", () => {
+    setMatches(true);
+    const { container } = render(<HookComp />);
+    expect(container.textContent).toBe(MATCH);
+    act(() => {
+      setMatches(false);
+    });
+    expect(container.textContent).toBe(NO_MATCH);
+    act(() => {
+      setMatches(true);
+    });
+    expect(container.textContent).toBe(MATCH);
   });
 });
 
 describe("MediaQuery", () => {
   test("renders when match", () => {
-    window.matchMedia = buildMatchMedia(true);
+    setMatches(true);
     const { container } = render(<MediaQuery query={QUERY} children={MATCH} />);
     expect(container.textContent).toBe(MATCH);
   });
 
   test("doesn't render when doesn't match", () => {
-    window.matchMedia = buildMatchMedia(false);
+    setMatches(false);
     const { container } = render(
       <MediaQuery query={QUERY} children={NO_MATCH} />
     );

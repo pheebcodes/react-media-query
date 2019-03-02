@@ -22,13 +22,19 @@ export function useMediaQuery(query) {
         mq.removeListener(cb);
       };
 
-      if (lastQuery.current === undefined) {
+      if (
+        lastQuery.current === undefined ||
+        lastQuery.current === null ||
+        lastQuery.current === ""
+      ) {
         setMatches(mq.matches);
       }
     }
 
     lastQuery.current = query;
   }
+
+  React.useEffect(() => cancel.current, [cancel.current]);
 
   return matches;
 }
