@@ -14,7 +14,7 @@ export function useMediaQuery(query) {
     }
 
     if (query) {
-      mq.current = matchMedia(query);
+      mq.current = window.matchMedia(query);
 
       callback.current = () => {
         setMatches(mq.current.matches);
