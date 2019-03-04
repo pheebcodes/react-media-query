@@ -3,7 +3,7 @@
  */
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-import { useMediaQuery, MediaQuery } from "./index.js";
+import { useMediaQuery, MediaQuery } from "./index.ts";
 
 const MATCH = "MATCH";
 const NO_MATCH = "NO_MATCH";
