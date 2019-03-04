@@ -1,6 +1,11 @@
 import React from "react";
 
-export function useMediaQuery(query) {
+export const useMediaQuery =
+  typeof window !== "undefined" && typeof window.matchMedia === "function"
+    ? useMediaQueryBrowser
+    : useMediaQueryServer;
+
+function useMediaQueryBrowser(query) {
   const [matches, setMatches] = React.useState();
 
   React.useLayoutEffect(
@@ -24,7 +29,11 @@ export function useMediaQuery(query) {
   return matches;
 }
 
-export function MediaQuery({ query, children }) {
-  const matches = useMediaQuery(query);
+function useMediaQueryServer(_query, ssr = false) {
+  return !!ssr;
+}
+
+export function MediaQuery({ query, children, ssr }) {
+  const matches = useMediaQuery(query, ssr);
   return matches ? children : null;
 }
