@@ -16,9 +16,10 @@
     "component"
   ],
   "scripts": {
-    "build": "tsc && rollup -c",
-    "test": "npm run build && jest",
-    "prepublishOnly": "npm run test"
+    "typecheck": "tsc",
+    "test": "npm run typecheck && jest",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run test && npm run build"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
