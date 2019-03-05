@@ -1,8 +1,11 @@
+import babel from "rollup-plugin-babel";
+
 export default {
-  input: 'src/index.js',
+  input: "src/index.ts",
   output: {
-    file: 'cjs/index.js',
-    format: 'cjs'
+    file: "cjs/index.js",
+    format: "cjs"
   },
-  external: ['react']
+  plugins: [babel({ extensions: [".ts"] })],
+  external: ["react"]
 };

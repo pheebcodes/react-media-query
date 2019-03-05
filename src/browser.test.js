@@ -1,7 +1,7 @@
 import { setMatches } from "./matchMedia.mock.js";
 import React from "react";
 import { render, act, cleanup } from "react-testing-library";
-import { MediaQuery, useMediaQuery } from "./index.js";
+import { MediaQuery, useMediaQuery } from "./index.ts";
 
 const MATCH = "MATCH";
 const NO_MATCH = "NO_MATCH";

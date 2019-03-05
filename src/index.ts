@@ -1,11 +1,11 @@
-import React from "react";
+import * as React from "react";
 
-export const useMediaQuery =
+export const useMediaQuery: (query: string, ssr?: boolean) => boolean =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? useMediaQueryBrowser
     : useMediaQueryServer;
 
-function useMediaQueryBrowser(query) {
+function useMediaQueryBrowser(query: string, _ssr?: boolean): boolean {
   const [matches, setMatches] = React.useState();
 
   React.useLayoutEffect(
@@ -22,6 +22,8 @@ function useMediaQueryBrowser(query) {
           mq.removeListener(cb);
         };
       }
+
+      return undefined;
     },
     [query]
   );
@@ -29,11 +31,17 @@ function useMediaQueryBrowser(query) {
   return matches;
 }
 
-function useMediaQueryServer(_query, ssr = false) {
+function useMediaQueryServer(_query: string, ssr?: boolean): boolean {
   return !!ssr;
 }
 
-export function MediaQuery({ query, children, ssr }) {
-  const matches = useMediaQuery(query, ssr);
+interface MediaQueryProps {
+  query: string,
+  ssr: boolean,
+  children: any
+};
+
+export function MediaQuery({ query, children, ssr }: MediaQueryProps) {
+  const matches: boolean = useMediaQuery(query, ssr);
   return matches ? children : null;
 }
