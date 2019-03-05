@@ -3,7 +3,7 @@
   "description": "Easy to use media query hook and component for React.",
   "version": "0.1.0",
   "main": "cjs/index.js",
-  "module": "src/index.js",
+  "module": "esm/index.js",
   "author": "Chance Dickson <me@chancedickson.com>",
   "license": "BSD-3-Clause",
   "repository": "github:chancedickson/react-media-query",
@@ -16,9 +16,10 @@
     "component"
   ],
   "scripts": {
-    "build": "tsc && rollup -c",
-    "test": "npm run build && jest",
-    "prepublishOnly": "npm run test"
+    "typecheck": "tsc",
+    "test": "npm run typecheck && jest",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run test && npm run build"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
