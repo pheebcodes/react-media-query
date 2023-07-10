@@ -1,0 +1,41 @@
+{
+  "name": "@chancedickson/react-media-query",
+  "description": "Easy to use media query hook and component for React.",
+  "version": "0.1.0",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "author": "Chance Dickson <me@chancedickson.com>",
+  "license": "BSD-3-Clause",
+  "repository": "github:chancedickson/react-media-query",
+  "homepage": "https://github.com/chancedickson/react-media-query",
+  "keywords": [
+    "react",
+    "media",
+    "query",
+    "hook",
+    "component"
+  ],
+  "scripts": {
+    "typecheck": "tsc",
+    "test": "npm run typecheck && jest",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run test && npm run build"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/react": "^16.8.6",
+    "jest": "^24.1.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "react-testing-library": "^6.0.0",
+    "rollup": "^1.2.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "typescript": "^3.3.3333"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  }
+}
